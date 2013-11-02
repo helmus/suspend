@@ -22,7 +22,7 @@ describe('suspend', function() {
 
 	it('should handle synchronous results', function(done) {
 		suspend(function*(resume) {
-			var doubled = yield syncDouble(42, resume);
+			var doubled = yield syncDouble(42, resume.sync);
 			assert.strictEqual(doubled, 84);
 			done();
 		})();
@@ -30,7 +30,7 @@ describe('suspend', function() {
 
 	it('should handle multiple runs', function(done) {
 		var test = suspend(function*(next, resume) {
-			var doubled = yield syncDouble(42, resume);
+			var doubled = yield syncDouble(42, resume.sync);
 			assert.strictEqual(doubled, 84);
 			next();
 		});
